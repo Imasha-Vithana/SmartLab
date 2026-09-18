@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SmartLab | Book Equipment</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+                Smart<span>Lab</span>
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+
+                <li>
+                    <a href="equipment.html">Equipment</a>
+                </li>
+
+                <li>
+                    <a href="my-bookings.html">My Bookings</a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section class="booking-section">
+
+            <div class="booking-card">
+
+                <h1>Book Laboratory Equipment</h1>
+
+                <p class="booking-description">
+                    Select the equipment, date and time for your laboratory booking.
+                </p>
+
+
+                <form id="bookingForm">
+
+                    <!-- Equipment -->
+
+                    <label for="equipment">
+                    Select Equipment
+                </label>
+
+                    <select id="equipment" required>
+
+                    <option value="">
+                        -- Select Equipment --
+                    </option>
+
+                    <option value="Arduino UNO">
+                        Arduino UNO
+                    </option>
+
+                    <option value="Raspberry Pi">
+                        Raspberry Pi
+                    </option>
+
+                    <option value="ESP32">
+                        ESP32
+                    </option>
+
+                    <option value="Projector">
+                        Projector
+                    </option>
+
+                </select>
+
+
+                    <!-- Date -->
+
+                    <label for="bookingDate">
+                    Booking Date
+                </label>
+
+                    <input type="date" id="bookingDate" required>
+
+
+                    <!-- Start Time -->
+
+                    <label for="startTime">
+                    Start Time
+                </label>
+
+                    <input type="time" id="startTime" required>
+
+
+                    <!-- End Time -->
+
+                    <label for="endTime">
+                    End Time
+                </label>
+
+                    <input type="time" id="endTime" required>
+
+
+                    <!-- Purpose -->
+
+                    <label for="purpose">
+                    Purpose of Booking
+                </label>
+
+                    <textarea id="purpose" rows="4" placeholder="Example: IoT assignment" required></textarea>
+
+
+                    <!-- Availability -->
+
+                    <div id="availabilityMessage" class="availability-message"></div>
+
+
+                    <!-- Buttons -->
+
+                    <button type="button" id="checkAvailabilityBtn" class="btn secondary-btn">
+                    Check Availability
+                </button>
+
+
+                    <button type="submit" id="bookBtn" class="btn primary-btn">
+                    Submit Booking
+                </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>© 2026 SmartLab.</p>
+
+    </footer>
+
+
+    <script src="js/booking.js"></script>
+
+</body>
+
+</html>
