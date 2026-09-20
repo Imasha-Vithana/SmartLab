@@ -41,7 +41,7 @@ loginForm.addEventListener(
 
             // Send login request to backend
             const response = await fetch(
-                "https://smartlab-production-5fe7.up.railway.app//api/auth/login", {
+                "https://smartlab-production-5fe7.up.railway.app/api/auth/login", {
                     method: "POST",
 
                     headers: {

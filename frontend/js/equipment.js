@@ -24,7 +24,7 @@ async function loadEquipment() {
 
         const response =
             await fetch(
-                "https://smartlab-production-5fe7.up.railway.app//api/equipment", {
+                "https://smartlab-production-5fe7.up.railway.app/api/equipment", {
                     headers: {
                         "Authorization": `Bearer ${token}`
                     }

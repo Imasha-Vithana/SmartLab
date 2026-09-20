@@ -10,7 +10,7 @@ async function loadEquipmentOptions() {
     if (!equipmentSelect) return;
 
     try {
-        const response = await fetch("https://smartlab-production-5fe7.up.railway.app//api/equipment");
+        const response = await fetch("https://smartlab-production-5fe7.up.railway.app/api/equipment");
         const data = await response.json();
 
         if (response.ok) {
@@ -60,7 +60,7 @@ function setupFormSubmit() {
         };
 
         try {
-            const res = await fetch("https://smartlab-production-5fe7.up.railway.app//api/bookings", {
+            const res = await fetch("https://smartlab-production-5fe7.up.railway.app/api/bookings", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -112,7 +112,7 @@ function setupAvailabilityCheck() {
 
         try {
             //  The URL is set to match the backend route in / availability.
-            const url = `https://smartlab-production-5fe7.up.railway.app//api/bookings/availability?equipment=${equipment}&bookingDate=${bookingDate}&startTime=${startTime}&endTime=${endTime}`;
+            const url = `https://smartlab-production-5fe7.up.railway.app/api/bookings/availability?equipment=${equipment}&bookingDate=${bookingDate}&startTime=${startTime}&endTime=${endTime}`;
 
             const res = await fetch(url, {
                 method: "GET",

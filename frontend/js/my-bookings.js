@@ -18,7 +18,7 @@ async function loadMyBookings() {
 
         const response =
             await fetch(
-                "https://smartlab-production-5fe7.up.railway.app//api/bookings/my-bookings", {
+                "https://smartlab-production-5fe7.up.railway.app/api/bookings/my-bookings", {
                     headers: {
 
                         "Authorization": `Bearer ${token}`
@@ -261,7 +261,7 @@ async function cancelBooking(
         const response =
             await fetch(
 
-                `https://smartlab-production-5fe7.up.railway.app//api/bookings/${bookingId}/cancel`,
+                `https://smartlab-production-5fe7.up.railway.app/api/bookings/${bookingId}/cancel`,
 
                 {
 

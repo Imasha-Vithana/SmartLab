@@ -127,7 +127,7 @@ async function deleteEquipment(equipmentId) {
     if (!confirmDelete) return;
 
     try {
-        const response = await fetch(`https://smartlab-production-5fe7.up.railway.app//api/admin/equipment/${equipmentId}`, {
+        const response = await fetch(`https://smartlab-production-5fe7.up.railway.app/api/admin/equipment/${equipmentId}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${token}`

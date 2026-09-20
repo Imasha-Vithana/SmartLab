@@ -16,7 +16,7 @@ if (!token) {
 // 2. LOAD DASHBOARD STATS
 async function loadDashboardStats() {
     try {
-        const response = await fetch("https://smartlab-production-5fe7.up.railway.app//api/admin/stats", {
+        const response = await fetch("https://smartlab-production-5fe7.up.railway.app/api/admin/stats", {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
