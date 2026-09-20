@@ -7,12 +7,12 @@ if (!token || role !== "admin") {
     window.location.href = "login.html";
 }
 
-// =====================================================
+
 // LOAD EQUIPMENT
-// =====================================================
+
 async function loadEquipment() {
     try {
-        const response = await fetch("http://localhost:5000/api/admin/equipment", {
+        const response = await fetch("https://smartlab-production-5fe7.up.railway.app//api/admin/equipment", {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -62,9 +62,8 @@ async function loadEquipment() {
     }
 }
 
-// =====================================================
 // ADD EQUIPMENT & EVENT LISTENERS
-// =====================================================
+
 document.addEventListener("DOMContentLoaded", () => {
     loadEquipment();
 
@@ -93,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
             };
 
             try {
-                const response = await fetch("http://localhost:5000/api/admin/equipment", {
+                const response = await fetch("https://smartlab-production-5fe7.up.railway.app//api/admin/equipment", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -119,16 +118,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// =====================================================
+
 // DELETE EQUIPMENT
-// =====================================================
+
 async function deleteEquipment(equipmentId) {
     const confirmDelete = confirm("Are you sure you want to delete this equipment?");
 
     if (!confirmDelete) return;
 
     try {
-        const response = await fetch(`http://localhost:5000/api/admin/equipment/${equipmentId}`, {
+        const response = await fetch(`https://smartlab-production-5fe7.up.railway.app//api/admin/equipment/${equipmentId}`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Bearer ${token}`

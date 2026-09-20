@@ -10,7 +10,7 @@ async function loadEquipmentOptions() {
     if (!equipmentSelect) return;
 
     try {
-        const response = await fetch("http://localhost:5000/api/equipment");
+        const response = await fetch("https://smartlab-production-5fe7.up.railway.app//api/equipment");
         const data = await response.json();
 
         if (response.ok) {
@@ -18,7 +18,7 @@ async function loadEquipmentOptions() {
             equipmentSelect.innerHTML = '<option value="">Select Equipment</option>';
 
             if (list.length === 0) {
-                console.warn("Database එකේ Equipment කිසිවක් හමු වූයේ නැත.");
+                console.warn("No equipment found in the database.");
                 return;
             }
 
@@ -29,7 +29,7 @@ async function loadEquipmentOptions() {
                 equipmentSelect.appendChild(option);
             });
         } else {
-            console.error("Equipment load කිරීමට නොහැකි විය:", data.message);
+            console.error("Equipment load failed:", data.message);
         }
     } catch (error) {
         console.error("Error fetching equipment:", error);
@@ -60,7 +60,7 @@ function setupFormSubmit() {
         };
 
         try {
-            const res = await fetch("http://localhost:5000/api/bookings", {
+            const res = await fetch("https://smartlab-production-5fe7.up.railway.app//api/bookings", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -84,7 +84,7 @@ function setupFormSubmit() {
     });
 }
 
-// 3. Check Availability (Backend Route එකට සහ Query parameters වලට නිවැරදිව සකසා ඇත)
+// 3. Check Availability ( It has been correctly configured for the Backend Route Query parameters )
 function setupAvailabilityCheck() {
     const checkBtn = document.getElementById("checkAvailabilityBtn");
     const msgPara = document.getElementById("availabilityMessage");
@@ -111,8 +111,8 @@ function setupAvailabilityCheck() {
         }
 
         try {
-            // URL එක backend route එකට ගැලපෙන සේ /availability ලෙස සකසා ඇත
-            const url = `http://localhost:5000/api/bookings/availability?equipment=${equipment}&bookingDate=${bookingDate}&startTime=${startTime}&endTime=${endTime}`;
+            //  The URL is set to match the backend route in / availability.
+            const url = `https://smartlab-production-5fe7.up.railway.app//api/bookings/availability?equipment=${equipment}&bookingDate=${bookingDate}&startTime=${startTime}&endTime=${endTime}`;
 
             const res = await fetch(url, {
                 method: "GET",

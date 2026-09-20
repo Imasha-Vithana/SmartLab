@@ -1,7 +1,4 @@
-// =====================================================
 // AUTHENTICATION
-// =====================================================
-
 if (!requireStudent()) {
 
     throw new Error(
@@ -15,24 +12,19 @@ const token =
     getToken();
 
 
-// =====================================================
 // VARIABLES
-// =====================================================
-
 let allEquipment = [];
 
 
-// =====================================================
-// GET EQUIPMENT
-// =====================================================
 
+// GET EQUIPMENT
 async function loadEquipment() {
 
     try {
 
         const response =
             await fetch(
-                "http://localhost:5000/api/equipment", {
+                "https://smartlab-production-5fe7.up.railway.app//api/equipment", {
                     headers: {
                         "Authorization": `Bearer ${token}`
                     }
@@ -87,10 +79,7 @@ async function loadEquipment() {
 }
 
 
-// =====================================================
 // CREATE CATEGORY OPTIONS
-// =====================================================
-
 function createCategoryOptions() {
 
     const categoryFilter =
@@ -136,10 +125,7 @@ function createCategoryOptions() {
 }
 
 
-// =====================================================
 // DISPLAY EQUIPMENT
-// =====================================================
-
 function displayEquipment(
     equipmentList
 ) {
@@ -308,10 +294,8 @@ function displayEquipment(
 }
 
 
-// =====================================================
-// FILTER EQUIPMENT
-// =====================================================
 
+// FILTER EQUIPMENT
 function filterEquipment() {
 
     const searchValue =
@@ -404,10 +388,7 @@ function filterEquipment() {
 }
 
 
-// =====================================================
 // SEARCH EVENT
-// =====================================================
-
 document
     .getElementById("searchInput")
     .addEventListener(
@@ -416,10 +397,7 @@ document
     );
 
 
-// =====================================================
 // CATEGORY EVENT
-// =====================================================
-
 document
     .getElementById("categoryFilter")
     .addEventListener(
@@ -428,10 +406,8 @@ document
     );
 
 
-// =====================================================
-// STATUS EVENT
-// =====================================================
 
+// STATUS EVENT
 document
     .getElementById("statusFilter")
     .addEventListener(
@@ -440,10 +416,8 @@ document
     );
 
 
-// =====================================================
-// CLEAR FILTERS
-// =====================================================
 
+// CLEAR FILTERS
 document
     .getElementById("clearFilters")
     .addEventListener(
@@ -471,10 +445,8 @@ document
     );
 
 
-// =====================================================
-// BOOK EQUIPMENT
-// =====================================================
 
+// BOOK EQUIPMENT
 function bookEquipment(
     equipmentId
 ) {
@@ -485,10 +457,8 @@ function bookEquipment(
 }
 
 
-// =====================================================
-// LOGOUT
-// =====================================================
 
+// LOGOUT
 document
     .getElementById("logoutBtn")
     .addEventListener(
@@ -497,8 +467,5 @@ document
     );
 
 
-// =====================================================
 // INITIAL LOAD
-// =====================================================
-
 loadEquipment();

@@ -1,7 +1,5 @@
-// =====================================================
-// GET TOKEN
-// =====================================================
 
+// GET TOKEN
 function getToken() {
 
     return localStorage.getItem(
@@ -11,10 +9,8 @@ function getToken() {
 }
 
 
-// =====================================================
-// GET USER
-// =====================================================
 
+// GET USER
 function getUser() {
 
     const user =
@@ -43,10 +39,7 @@ function getUser() {
 }
 
 
-// =====================================================
 // CHECK LOGIN
-// =====================================================
-
 function requireLogin() {
 
     const token =
@@ -72,10 +65,7 @@ function requireLogin() {
 }
 
 
-// =====================================================
 // REQUIRE ADMIN
-// =====================================================
-
 function requireAdmin() {
 
     if (!requireLogin()) {
@@ -111,10 +101,7 @@ function requireAdmin() {
 }
 
 
-// =====================================================
 // REQUIRE STUDENT
-// =====================================================
-
 function requireStudent() {
 
     if (!requireLogin()) {
@@ -150,10 +137,7 @@ function requireStudent() {
 }
 
 
-// =====================================================
 // LOGOUT
-// =====================================================
-
 function logout() {
 
     localStorage.removeItem(

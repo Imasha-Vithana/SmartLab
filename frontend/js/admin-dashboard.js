@@ -1,25 +1,22 @@
-// =====================================================
 // 1. CHECK ADMIN ACCESS
-// =====================================================
+
 if (typeof requireAdmin === "function") {
     if (!requireAdmin()) {
         throw new Error("Unauthorized access. Admin login required.");
     }
 }
 
-// Token එක LocalStorage එකෙන් ලබා ගැනීම
+// Retriveving the tokenfrom localStorage 
 const token = localStorage.getItem("token");
 
 if (!token) {
     window.location.href = "login.html";
 }
 
-// =====================================================
 // 2. LOAD DASHBOARD STATS
-// =====================================================
 async function loadDashboardStats() {
     try {
-        const response = await fetch("http://localhost:5000/api/admin/stats", {
+        const response = await fetch("https://smartlab-production-5fe7.up.railway.app//api/admin/stats", {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -32,7 +29,7 @@ async function loadDashboardStats() {
             return;
         }
 
-        // Element එකක් තිබේදැයි බලමින් Safely Text set කිරීම
+        // Checking if an element exists and safely and safely setting Text
         const setStat = (id, val) => {
             const el = document.getElementById(id);
             if (el) el.textContent = val !== undefined ? val : 0;
@@ -51,9 +48,8 @@ async function loadDashboardStats() {
     }
 }
 
-// =====================================================
+
 // 3. INITIAL LOAD & LOGOUT
-// =====================================================
 document.addEventListener("DOMContentLoaded", () => {
     const logoutBtn = document.getElementById("logoutBtn");
     if (logoutBtn) {
@@ -64,6 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Page එක load වෙද්දී Stats load කිරීම
+    // Loading stats ahen the page loads
     loadDashboardStats();
 });

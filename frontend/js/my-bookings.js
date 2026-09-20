@@ -2,10 +2,8 @@ const token =
     localStorage.getItem("token");
 
 
-// =====================================================
-// CHECK LOGIN
-// =====================================================
 
+// CHECK LOGIN
 if (!token) {
 
     window.location.href =
@@ -13,18 +11,14 @@ if (!token) {
 
 }
 
-
-// =====================================================
 // LOAD MY BOOKINGS
-// =====================================================
-
 async function loadMyBookings() {
 
     try {
 
         const response =
             await fetch(
-                "http://localhost:5000/api/bookings/my-bookings", {
+                "https://smartlab-production-5fe7.up.railway.app//api/bookings/my-bookings", {
                     headers: {
 
                         "Authorization": `Bearer ${token}`
@@ -56,9 +50,8 @@ async function loadMyBookings() {
         container.innerHTML = "";
 
 
-        // -----------------------------------------
+
         // No bookings
-        // -----------------------------------------
 
         if (
             data.bookings.length === 0
@@ -86,9 +79,8 @@ async function loadMyBookings() {
         }
 
 
-        // -----------------------------------------
+
         // Display bookings
-        // -----------------------------------------
 
         data.bookings.forEach(
                 (booking) => {
@@ -244,9 +236,8 @@ async function loadMyBookings() {
 }
 
 
-// =====================================================
+
 // CANCEL BOOKING
-// =====================================================
 
 async function cancelBooking(
     bookingId
@@ -270,7 +261,7 @@ async function cancelBooking(
         const response =
             await fetch(
 
-                `http://localhost:5000/api/bookings/${bookingId}/cancel`,
+                `https://smartlab-production-5fe7.up.railway.app//api/bookings/${bookingId}/cancel`,
 
                 {
 
@@ -315,9 +306,5 @@ async function cancelBooking(
 
 }
 
-
-// =====================================================
 // INITIAL LOAD
-// =====================================================
-
 loadMyBookings();

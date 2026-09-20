@@ -1,7 +1,4 @@
-// ==========================================
 // SMARTLAB LOGIN
-// ==========================================
-
 const loginForm =
     document.getElementById("loginForm");
 
@@ -14,9 +11,8 @@ loginForm.addEventListener(
         event.preventDefault();
 
 
-        // ======================================
+
         // Get input values
-        // ======================================
 
         const email =
             document.getElementById("email")
@@ -28,10 +24,8 @@ loginForm.addEventListener(
             .value;
 
 
-        // ======================================
-        // Check fields
-        // ======================================
 
+        // Check fields
         if (!email || !password) {
 
             alert(
@@ -44,12 +38,10 @@ loginForm.addEventListener(
 
         try {
 
-            // ==================================
-            // Send login request to backend
-            // ==================================
 
+            // Send login request to backend
             const response = await fetch(
-                "http://localhost:5000/api/auth/login", {
+                "https://smartlab-production-5fe7.up.railway.app//api/auth/login", {
                     method: "POST",
 
                     headers: {
@@ -68,9 +60,8 @@ loginForm.addEventListener(
             const data = await response.json();
 
 
-            // ==================================
+
             // Check response
-            // ==================================
 
             if (!response.ok) {
 
@@ -80,9 +71,8 @@ loginForm.addEventListener(
             }
 
 
-            // ==================================
+
             // Login successful
-            // ==================================
 
             // Save JWT token
             localStorage.setItem(
@@ -104,10 +94,8 @@ loginForm.addEventListener(
             );
 
 
-            // ==================================
-            // Redirect based on user role
-            // ==================================
 
+            // Redirect based on user role
             if (data.user.role === "admin") {
 
                 window.location.href =
