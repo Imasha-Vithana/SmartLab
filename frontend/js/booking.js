@@ -1,122 +1,139 @@
-const bookingForm = document.getElementById("bookingForm");
+document.addEventListener("DOMContentLoaded", function() {
+    loadEquipmentOptions();
+    setupFormSubmit();
+    setupAvailabilityCheck();
+});
 
-const checkAvailabilityBtn =
-    document.getElementById("checkAvailabilityBtn");
+// 1. Load Equipment Options
+async function loadEquipmentOptions() {
+    const equipmentSelect = document.getElementById("equipment");
+    if (!equipmentSelect) return;
 
-const availabilityMessage =
-    document.getElementById("availabilityMessage");
+    try {
+        const response = await fetch("http://localhost:5000/api/equipment");
+        const data = await response.json();
 
+        if (response.ok) {
+            const list = Array.isArray(data) ? data : (data.equipment || []);
+            equipmentSelect.innerHTML = '<option value="">Select Equipment</option>';
 
-checkAvailabilityBtn.addEventListener(
-    "click",
-    function() {
+            if (list.length === 0) {
+                console.warn("Database එකේ Equipment කිසිවක් හමු වූයේ නැත.");
+                return;
+            }
 
-        const equipment =
-            document.getElementById("equipment").value;
-
-        const date =
-            document.getElementById("bookingDate").value;
-
-        const startTime =
-            document.getElementById("startTime").value;
-
-        const endTime =
-            document.getElementById("endTime").value;
-
-
-        if (
-            equipment === "" ||
-            date === "" ||
-            startTime === "" ||
-            endTime === ""
-        ) {
-
-            showMessage(
-                "Please fill in all booking details.",
-                "unavailable"
-            );
-
-            return;
+            list.forEach(item => {
+                const option = document.createElement("option");
+                option.value = item._id || item.id;
+                option.textContent = item.name ? `${item.name} (${item.category || ''})` : (item.title || item.equipmentName);
+                equipmentSelect.appendChild(option);
+            });
+        } else {
+            console.error("Equipment load කිරීමට නොහැකි විය:", data.message);
         }
-
-
-        if (startTime >= endTime) {
-
-            showMessage(
-                "End time must be later than start time.",
-                "unavailable"
-            );
-
-            return;
-        }
-
-
-        /*
-         * Temporary availability result.
-         *
-         * Later this will be connected
-         * to our MongoDB database.
-         */
-
-        showMessage(
-            `${equipment} is available for the selected time.`,
-            "available"
-        );
-
+    } catch (error) {
+        console.error("Error fetching equipment:", error);
     }
-);
+}
 
+// 2. Submit Booking Form
+function setupFormSubmit() {
+    const bookingForm = document.getElementById("bookingForm");
+    if (!bookingForm) return;
 
-bookingForm.addEventListener(
-    "submit",
-    function(event) {
+    bookingForm.addEventListener("submit", async function(e) {
+        e.preventDefault();
 
-        event.preventDefault();
-
-
-        const equipment =
-            document.getElementById("equipment").value;
-
-        const date =
-            document.getElementById("bookingDate").value;
-
-        const startTime =
-            document.getElementById("startTime").value;
-
-        const endTime =
-            document.getElementById("endTime").value;
-
-        const purpose =
-            document.getElementById("purpose").value;
-
-
-        if (startTime >= endTime) {
-
-            showMessage(
-                "End time must be later than start time.",
-                "unavailable"
-            );
-
+        const token = localStorage.getItem("token");
+        if (!token) {
+            alert("Please First Login!");
+            window.location.href = "login.html";
             return;
         }
 
+        const bookingData = {
+            equipment: document.getElementById("equipment").value,
+            bookingDate: document.getElementById("bookingDate").value,
+            startTime: document.getElementById("startTime").value,
+            endTime: document.getElementById("endTime").value,
+            purpose: document.getElementById("purpose").value
+        };
 
-        alert(
-            `Booking submitted!\n\n` +
-            `Equipment: ${equipment}\n` +
-            `Date: ${date}\n` +
-            `Time: ${startTime} - ${endTime}\n` +
-            `Purpose: ${purpose}`
-        );
+        try {
+            const res = await fetch("http://localhost:5000/api/bookings", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(bookingData)
+            });
 
-    }
-);
+            const result = await res.json();
 
+            if (res.ok) {
+                alert("Booking Successfully Entered!");
+                window.location.href = "my-bookings.html";
+            } else {
+                alert(result.message || "Booking Failed.");
+            }
+        } catch (err) {
+            console.error("Booking submit error:", err);
+            alert("Unable to connect to Server.");
+        }
+    });
+}
 
-function showMessage(message, type) {
+// 3. Check Availability (Backend Route එකට සහ Query parameters වලට නිවැරදිව සකසා ඇත)
+function setupAvailabilityCheck() {
+    const checkBtn = document.getElementById("checkAvailabilityBtn");
+    const msgPara = document.getElementById("availabilityMessage");
 
-    availabilityMessage.textContent = message;
+    if (!checkBtn || !msgPara) return;
 
-    availabilityMessage.className =
-        `availability-message ${type}`;
+    checkBtn.addEventListener("click", async function() {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            msgPara.style.color = "red";
+            msgPara.textContent = "Please Login First!";
+            return;
+        }
+
+        const equipment = document.getElementById("equipment").value;
+        const bookingDate = document.getElementById("bookingDate").value;
+        const startTime = document.getElementById("startTime").value;
+        const endTime = document.getElementById("endTime").value;
+
+        if (!equipment || !bookingDate || !startTime || !endTime) {
+            msgPara.style.color = "red";
+            msgPara.textContent = "Please Select Equipment, Date & Time!";
+            return;
+        }
+
+        try {
+            // URL එක backend route එකට ගැලපෙන සේ /availability ලෙස සකසා ඇත
+            const url = `http://localhost:5000/api/bookings/availability?equipment=${equipment}&bookingDate=${bookingDate}&startTime=${startTime}&endTime=${endTime}`;
+
+            const res = await fetch(url, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+
+            const data = await res.json();
+
+            if (res.ok && data.available) {
+                msgPara.style.color = "green";
+                msgPara.textContent = `Available! (${data.availableUnits} units available)`;
+            } else {
+                msgPara.style.color = "red";
+                msgPara.textContent = data.message || "This time slot is already booked.";
+            }
+        } catch (err) {
+            console.error("Availability check error:", err);
+            msgPara.style.color = "red";
+            msgPara.textContent = "Unable to check availability.";
+        }
+    });
 }

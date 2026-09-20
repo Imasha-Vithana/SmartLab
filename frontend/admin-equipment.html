@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Equipment</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Equipment Management</h1>
+
+        <!-- =============================== -->
+        <!-- ADD EQUIPMENT -->
+        <!-- =============================== -->
+        <section class="card">
+            <h2>Add Equipment</h2>
+
+            <form id="equipmentForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name">Equipment Name</label>
+                        <input type="text" id="name" placeholder="Equipment Name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <input type="text" id="category" placeholder="Category" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantity">Quantity</label>
+                        <input type="number" id="quantity" placeholder="Quantity" min="1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" placeholder="Location" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status">
+                            <option value="available">Available</option>
+                            <option value="unavailable">Unavailable</option>
+                            <option value="maintenance">Maintenance</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="description">Description</label>
+                        <textarea id="description" placeholder="Description" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add Equipment</button>
+            </form>
+        </section>
+
+        <!-- =============================== -->
+        <!-- EQUIPMENT LIST -->
+        <!-- =============================== -->
+        <section class="card">
+            <h2>Equipment List</h2>
+
+            <div id="equipmentContainer" class="equipment-grid">
+                Loading...
+            </div>
+        </section>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/admin-equipment.js"></script>
+
+</body>
+
+</html>

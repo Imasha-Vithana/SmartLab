@@ -4,9 +4,10 @@
 <head>
 
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SmartLab | Equipment</title>
+    <title>SmartLab Equipment</title>
 
     <link rel="stylesheet" href="css/style.css">
 
@@ -14,120 +15,99 @@
 
 <body>
 
+    <!-- =============================== -->
+    <!-- HEADER -->
+    <!-- =============================== -->
+
     <header>
 
-        <nav class="navbar">
+        <h1>SmartLab Equipment</h1>
 
-            <div class="logo">
-                Smart<span>Lab</span>
-            </div>
+        <nav>
 
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="equipment.html">Equipment</a></li>
-                <li><a href="login.html">Login</a></li>
-            </ul>
+            <a href="student-dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="my-bookings.html">
+                My Bookings
+            </a>
+
+            <button id="logoutBtn">
+                Logout
+            </button>
 
         </nav>
 
     </header>
 
 
+    <!-- =============================== -->
+    <!-- MAIN -->
+    <!-- =============================== -->
+
     <main>
 
-        <section class="equipment-section">
-
-            <h1>Laboratory Equipment</h1>
-
-            <p>
-                Browse available laboratory equipment.
-            </p>
+        <h2>Available Laboratory Equipment</h2>
 
 
-            <div class="equipment-grid">
+        <!-- =============================== -->
+        <!-- SEARCH + FILTER -->
+        <!-- =============================== -->
 
-                <div class="equipment-card">
+        <section class="filter-section">
 
-                    <div class="equipment-icon">🔌</div>
-
-                    <h2>Arduino UNO</h2>
-
-                    <p>
-                        Microcontroller development board for electronics and IoT projects.
-                    </p>
-
-                    <span class="available">
-                    ● Available
-                </span>
-
-                    <a href="booking.html" class="btn primary-btn">
-                    Book Now
-                </a>
-
-                </div>
+            <input type="text" id="searchInput" placeholder="Search equipment...">
 
 
-                <div class="equipment-card">
+            <select id="categoryFilter">
 
-                    <div class="equipment-icon">💻</div>
+                <option value="all">
+                    All Categories
+                </option>
 
-                    <h2>Raspberry Pi</h2>
-
-                    <p>
-                        Single-board computer for programming and embedded projects.
-                    </p>
-
-                    <span class="available">
-                    ● Available
-                </span>
-
-                    <a href="booking.html" class="btn primary-btn">
-                    Book Now
-                </a>
-
-                </div>
+            </select>
 
 
-                <div class="equipment-card">
+            <select id="statusFilter">
 
-                    <div class="equipment-icon">📡</div>
+                <option value="all">
+                    All Status
+                </option>
 
-                    <h2>ESP32</h2>
+                <option value="available">
+                    Available
+                </option>
 
-                    <p>
-                        Wi-Fi and Bluetooth enabled microcontroller board.
-                    </p>
+                <option value="unavailable">
+                    Unavailable
+                </option>
 
-                    <span class="available">
-                    ● Available
-                </span>
+                <option value="maintenance">
+                    Maintenance
+                </option>
 
-                    <a href="booking.html" class="btn primary-btn">
-                    Book Now
-                </a>
-
-                </div>
+            </select>
 
 
-                <div class="equipment-card">
+            <button id="clearFilters">
 
-                    <div class="equipment-icon">📽️</div>
+                Clear Filters
 
-                    <h2>Projector</h2>
+            </button>
 
-                    <p>
-                        Multimedia projector for presentations and academic activities.
-                    </p>
+        </section>
 
-                    <span class="available">
-                    ● Available
-                </span>
 
-                    <a href="booking.html" class="btn primary-btn">
-                    Book Now
-                </a>
+        <!-- =============================== -->
+        <!-- EQUIPMENT LIST -->
+        <!-- =============================== -->
 
-                </div>
+        <section>
+
+            <div id="equipmentContainer" class="equipment-grid">
+
+                Loading equipment...
 
             </div>
 
@@ -136,11 +116,9 @@
     </main>
 
 
-    <footer>
+    <script src="js/auth.js"></script>
 
-        <p>© 2026 SmartLab.</p>
-
-    </footer>
+    <script src="js/equipment.js"></script>
 
 </body>
 

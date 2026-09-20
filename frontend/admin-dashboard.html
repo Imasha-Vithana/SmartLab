@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - SmartLab</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Modern Header Navbar -->
+        <header class="navbar">
+            <div class="logo">
+                <h2>SmartLab <span class="badge-admin">Admin</span></h2>
+            </div>
+            <nav>
+                <a href="admin-dashboard.html" class="active">Dashboard</a>
+                <a href="admin-equipment.html">Equipment</a>
+                <button id="logoutBtn" class="btn-logout">Logout</button>
+            </nav>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Bookings</h3>
+                <p id="totalBookings">0</p>
+            </div>
+            <div class="stat-card warning">
+                <h3>Pending</h3>
+                <p id="pendingBookings">0</p>
+            </div>
+            <div class="stat-card success">
+                <h3>Approved</h3>
+                <p id="approvedBookings">0</p>
+            </div>
+            <div class="stat-card info">
+                <h3>Total Equipment</h3>
+                <p id="totalEquipment">0</p>
+            </div>
+            <div class="stat-card danger">
+                <h3>Rejected</h3>
+                <p id="rejectedBookings">0</p>
+            </div>
+            <div class="stat-card secondary">
+                <h3>Cancelled</h3>
+                <p id="cancelledBookings">0</p>
+            </div>
+        </div>
+
+        <!-- Booking Requests Section -->
+        <h2 style="margin: 30px 0 15px; color: #1b2559;">Booking Requests</h2>
+        <div id="bookingsContainer" class="bookings-grid">
+            <p>Loading bookings...</p>
+        </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/admin-dashboard.js"></script>
+</body>
+
+</html>

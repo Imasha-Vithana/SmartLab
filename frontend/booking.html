@@ -65,27 +65,9 @@
                     Select Equipment
                 </label>
 
-                    <select id="equipment" required>
+                    <select id="equipment" name="equipment" class="from-control" required>
 
-                    <option value="">
-                        -- Select Equipment --
-                    </option>
-
-                    <option value="Arduino UNO">
-                        Arduino UNO
-                    </option>
-
-                    <option value="Raspberry Pi">
-                        Raspberry Pi
-                    </option>
-
-                    <option value="ESP32">
-                        ESP32
-                    </option>
-
-                    <option value="Projector">
-                        Projector
-                    </option>
+                    <option value="">Select Equipment</option>
 
                 </select>
 
@@ -126,16 +108,13 @@
                     <textarea id="purpose" rows="4" placeholder="Example: IoT assignment" required></textarea>
 
 
-                    <!-- Availability -->
-
-                    <div id="availabilityMessage" class="availability-message"></div>
-
-
                     <!-- Buttons -->
 
                     <button type="button" id="checkAvailabilityBtn" class="btn secondary-btn">
                     Check Availability
                 </button>
+
+                    <p id="availabilityMessage" style="margin-top: 10px; font-weight: bold;"></p>
 
 
                     <button type="submit" id="bookBtn" class="btn primary-btn">
