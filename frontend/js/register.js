@@ -24,7 +24,7 @@ registerForm.addEventListener(
         try {
 
             const response = await fetch(
-                "https://smartlab-production-5fe7.up.railway.app//api/auth/register", {
+                "https://smartlab-production-5fe7.up.railway.app/api/auth/register", {
                     method: "POST",
 
                     headers: {
