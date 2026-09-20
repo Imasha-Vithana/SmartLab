@@ -5,10 +5,10 @@ const Equipment = require("../models/Equipment");
 const router = express.Router();
 
 
-// =====================================================
+
 // ADD EQUIPMENT
 // POST /api/equipment
-// =====================================================
+
 
 router.post("/", async(req, res) => {
     try {
@@ -80,10 +80,10 @@ router.post("/", async(req, res) => {
 });
 
 
-// =====================================================
+
 // GET ALL EQUIPMENT
 // GET /api/equipment
-// =====================================================
+
 
 router.get("/", async(req, res) => {
     try {
@@ -112,10 +112,8 @@ router.get("/", async(req, res) => {
 });
 
 
-// =====================================================
 // GET ONE EQUIPMENT
 // GET /api/equipment/:id
-// =====================================================
 
 router.get("/:id", async(req, res) => {
     try {
@@ -152,10 +150,9 @@ router.get("/:id", async(req, res) => {
 });
 
 
-// =====================================================
+
 // UPDATE EQUIPMENT
 // PUT /api/equipment/:id
-// =====================================================
 
 router.put("/:id", async(req, res) => {
     try {
@@ -214,10 +211,9 @@ router.put("/:id", async(req, res) => {
 });
 
 
-// =====================================================
+
 // DELETE EQUIPMENT
 // DELETE /api/equipment/:id
-// =====================================================
 
 router.delete("/:id", async(req, res) => {
     try {

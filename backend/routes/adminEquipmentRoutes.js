@@ -6,10 +6,10 @@ const admin = require("../middleware/adminMiddleware");
 
 const router = express.Router();
 
-// =====================================================
+
 // GET ALL EQUIPMENT
 // GET /api/admin/equipment
-// =====================================================
+
 router.get(
     "/",
     protect,
@@ -31,10 +31,10 @@ router.get(
     }
 );
 
-// =====================================================
+
 // ADD EQUIPMENT
 // POST /api/admin/equipment
-// =====================================================
+
 router.post(
     "/",
     protect,
@@ -46,14 +46,14 @@ router.post(
                 category,
                 description,
                 quantity,
-                availableQuantity, // 🔴 req.body එකෙන් ලබා ගැනීම
+                availableQuantity, //  req.body
                 location,
                 status
             } = req.body;
 
-            // -----------------------------------------
+           
             // Validation
-            // -----------------------------------------
+            
             if (!name || !category || !quantity || !location) {
                 return res.status(400).json({
                     message: "Name, category, quantity and location are required."
@@ -66,11 +66,10 @@ router.post(
                 });
             }
 
-            // -----------------------------------------
             // Create equipment
-            // -----------------------------------------
+           
             const numQuantity = Number(quantity);
-            // availableQuantity එක එව්වේ නැත්නම් quantity අගයම ගන්නවා
+            // if availableQuantity is not provided, the quantity value will be taken
             const numAvailableQuantity = availableQuantity !== undefined ? Number(availableQuantity) : numQuantity;
 
             const newEquipment = new Equipment({
@@ -78,7 +77,7 @@ router.post(
                 category: category.trim(),
                 description: description ? description.trim() : "",
                 quantity: numQuantity,
-                availableQuantity: numAvailableQuantity, // 🔴 මෙන්න මේ missing field එක එකතු කළා
+                availableQuantity: numAvailableQuantity, //  Add the missing field 
                 location: location.trim(),
                 status: status || "available"
             });
@@ -100,10 +99,10 @@ router.post(
     }
 );
 
-// =====================================================
+
 // UPDATE EQUIPMENT
 // PUT /api/admin/equipment/:id
-// =====================================================
+
 router.put(
     "/:id",
     protect,
@@ -128,9 +127,9 @@ router.put(
                 });
             }
 
-            // -----------------------------------------
+            
             // Update fields
-            // -----------------------------------------
+            
             if (name !== undefined) equipment.name = name.trim();
             if (category !== undefined) equipment.category = category.trim();
             if (description !== undefined) equipment.description = description.trim();
@@ -176,10 +175,10 @@ router.put(
     }
 );
 
-// =====================================================
+
 // DELETE EQUIPMENT
 // DELETE /api/admin/equipment/:id
-// =====================================================
+
 router.delete(
     "/:id",
     protect,

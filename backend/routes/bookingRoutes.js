@@ -5,10 +5,10 @@ const protect = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// =====================================================
+
 // CHECK AVAILABILITY
 // GET /api/bookings/availability OR /api/bookings/check-availability
-// =====================================================
+
 const checkAvailabilityHandler = async(req, res) => {
     try {
         const equipment = req.query.equipment;
@@ -73,10 +73,10 @@ const checkAvailabilityHandler = async(req, res) => {
 router.get("/availability", protect, checkAvailabilityHandler);
 router.get("/check-availability", protect, checkAvailabilityHandler);
 
-// =====================================================
+
 // GET MY BOOKINGS
 // GET /api/bookings/my OR /api/bookings/my-bookings
-// =====================================================
+
 const getMyBookingsHandler = async(req, res) => {
     try {
         const userId = req.user ? (req.user._id || req.user.id) : req.user;
@@ -101,10 +101,10 @@ const getMyBookingsHandler = async(req, res) => {
 router.get("/my", protect, getMyBookingsHandler);
 router.get("/my-bookings", protect, getMyBookingsHandler);
 
-// =====================================================
+
 // CREATE BOOKING
 // POST /api/bookings
-// =====================================================
+
 router.post("/", protect, async(req, res) => {
     try {
         const { equipment, bookingDate, startTime, endTime, purpose } = req.body;
@@ -174,10 +174,10 @@ router.post("/", protect, async(req, res) => {
     }
 });
 
-// =====================================================
+
 // CANCEL BOOKING
 // PUT /api/bookings/:id/cancel
-// =====================================================
+
 router.put("/:id/cancel", protect, async(req, res) => {
     try {
         const userId = req.user ? (req.user._id || req.user.id) : req.user;
@@ -215,10 +215,10 @@ router.put("/:id/cancel", protect, async(req, res) => {
     }
 });
 
-// =====================================================
+
 // GET ONE BOOKING (Must be at the BOTTOM)
 // GET /api/bookings/:id
-// =====================================================
+
 router.get("/:id", protect, async(req, res) => {
     try {
         const userId = req.user ? (req.user._id || req.user.id) : req.user;

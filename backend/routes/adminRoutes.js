@@ -4,7 +4,7 @@ const User = require("../models/User");
 const Equipment = require("../models/Equipment");
 const Booking = require("../models/Booking");
 
-// Middlewares වෙන වෙනම File වලින් Import කිරීම
+//  Importing Middlewares from separeate files 
 const protect = require("../middleware/authMiddleware");
 const admin = require("../middleware/adminMiddleware");
 

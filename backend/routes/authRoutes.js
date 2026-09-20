@@ -7,9 +7,9 @@ const User = require("../models/User");
 const router = express.Router();
 
 
-// ==========================================
+
 // REGISTER
-// ==========================================
+
 
 router.post("/register", async(req, res) => {
 
@@ -18,9 +18,8 @@ router.post("/register", async(req, res) => {
         const { name, email, password } = req.body;
 
 
-        // --------------------------------------
         // 1. Check whether all fields are filled
-        // --------------------------------------
+        
 
         if (!name || !email || !password) {
 
@@ -31,9 +30,9 @@ router.post("/register", async(req, res) => {
         }
 
 
-        // --------------------------------------
+      
         // 2. Validate name
-        // --------------------------------------
+       
 
         if (name.trim().length < 2) {
 
@@ -44,9 +43,9 @@ router.post("/register", async(req, res) => {
         }
 
 
-        // --------------------------------------
+       
         // 3. Validate email
-        // --------------------------------------
+        
 
         const cleanEmail =
             email.trim().toLowerCase();
@@ -63,9 +62,9 @@ router.post("/register", async(req, res) => {
         }
 
 
-        // --------------------------------------
+      
         // 4. Validate password
-        // --------------------------------------
+       
 
         if (password.length < 6) {
 
@@ -76,9 +75,9 @@ router.post("/register", async(req, res) => {
         }
 
 
-        // --------------------------------------
+        
         // 5. Check whether email already exists
-        // --------------------------------------
+     
 
         const existingUser =
             await User.findOne({
@@ -94,9 +93,9 @@ router.post("/register", async(req, res) => {
         }
 
 
-        // --------------------------------------
+        
         // 6. Hash password
-        // --------------------------------------
+      
 
         const hashedPassword =
             await bcrypt.hash(
@@ -105,9 +104,9 @@ router.post("/register", async(req, res) => {
             );
 
 
-        // --------------------------------------
+        
         // 7. Create new student user
-        // --------------------------------------
+        
 
         const newUser =
             new User({
@@ -123,16 +122,16 @@ router.post("/register", async(req, res) => {
             });
 
 
-        // --------------------------------------
+        
         // 8. Save user
-        // --------------------------------------
+    
 
         await newUser.save();
 
 
-        // --------------------------------------
+        
         // 9. Send success response
-        // --------------------------------------
+        
 
         res.status(201).json({
 
@@ -159,9 +158,9 @@ router.post("/register", async(req, res) => {
 
 
 
-// ==========================================
+
 // LOGIN
-// ==========================================
+
 
 router.post("/login", async(req, res) => {
 
@@ -171,9 +170,9 @@ router.post("/login", async(req, res) => {
         req.body;
 
 
-        // --------------------------------------
+        
         // 1. Check whether fields are filled
-        // --------------------------------------
+       
 
         if (!email || !password) {
 
@@ -186,17 +185,17 @@ router.post("/login", async(req, res) => {
         }
 
 
-        // --------------------------------------
+       
         // 2. Clean email
-        // --------------------------------------
+      
 
         const cleanEmail =
             email.trim().toLowerCase();
 
 
-        // --------------------------------------
+        
         // 3. Validate email format
-        // --------------------------------------
+       
 
         const emailPattern =
             /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -212,9 +211,9 @@ router.post("/login", async(req, res) => {
         }
 
 
-        // --------------------------------------
+      
         // 4. Find user by email
-        // --------------------------------------
+        
 
         const user =
             await User.findOne({
@@ -235,9 +234,9 @@ router.post("/login", async(req, res) => {
         }
 
 
-        // --------------------------------------
+        
         // 5. Compare password
-        // --------------------------------------
+        
 
         const isPasswordCorrect =
             await bcrypt.compare(
@@ -257,9 +256,9 @@ router.post("/login", async(req, res) => {
         }
 
 
-        // --------------------------------------
+        
         // 6. Create JWT token
-        // --------------------------------------
+       
 
         const token =
             jwt.sign(
@@ -278,9 +277,9 @@ router.post("/login", async(req, res) => {
             );
 
 
-        // --------------------------------------
+       
         // 7. Send response
-        // --------------------------------------
+      
 
         res.status(200).json({
 
