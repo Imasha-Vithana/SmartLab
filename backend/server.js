@@ -23,7 +23,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
 
     res.send(
-        "SmartLab API is running..."
+        "SmartLab API is running successfully!"
     );
 
 });
